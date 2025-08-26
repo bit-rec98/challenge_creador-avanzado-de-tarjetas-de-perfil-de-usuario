@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -43,26 +42,5 @@ export class LoadingFeedbackService {
     } else {
       this.isLoadingSubject.next(false);
     }
-  }
-
-  /**
-   * Método para envolver un observable con gestión de estado de carga
-   * - Inicia el spinner al suscribirse
-   * - Detiene el spinner al completarse
-   * - Detiene el spinner al producirse un error
-   * - Respeta el tiempo mínimo de visualización
-   * @param obs$ El observable a envolver
-   * @returns {Observable<T>} El observable envuelto
-   */
-  wrapObservable<T>(obs$: Observable<T>): Observable<T> {
-    this.show();
-
-    return obs$.pipe(
-      tap({
-        next: () => this.hide(),
-        error: () => this.hide(),
-        complete: () => this.hide(),
-      })
-    );
   }
 }
