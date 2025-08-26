@@ -1,0 +1,24 @@
+<div class="modal-overlay" *ngIf="user" (click)="onClose()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="onClose()">×</button>
+
+    <div class="modal-header">
+      <img [src]="user.picture" [alt]="user.fullName" />
+      <h2>{{ user.fullName }}</h2>
+    </div>
+
+    <div class="modal-body">
+      <div class="detail-section">
+        <h3>Información de contacto</h3>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Teléfono:</strong> {{ user.phone }}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Ubicación</h3>
+        <p><strong>País:</strong> {{ user.country }}</p>
+        <p><strong>Ciudad:</strong> {{ user.city }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+.user-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.user-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.user-avatar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4a90e2;
+}
+
+.user-info {
+  text-align: center;
+}
+
+.user-info h3 {
+  margin: 0 0 10px;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.user-info p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,141 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+header h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.search-sort-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.search-input, .sort-select {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  min-width: 250px;
+}
+
+.search-input:focus, .sort-select:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.user-grid-item {
+  height: 100%;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(74, 144, 226, 0.3);
+  border-radius: 50%;
+  border-top-color: #4a90e2;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.no-results {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.load-more-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.load-more-button:hover {
+  background-color: #3570b8;
+}
+
+.load-more-button:disabled {
+  background-color: #a1c6ea;
+  cursor: not-allowed;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.generate-button {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.generate-button:hover {
+  background-color: #4cae4c;
+}
+
+@media (max-width: 768px) {
+  .user-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .search-input, .sort-select {
+    min-width: 100%;
+  }
+}

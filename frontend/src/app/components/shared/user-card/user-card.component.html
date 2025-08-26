@@ -1,0 +1,12 @@
+<div class="user-card" (click)="onCardClick()">
+  <div class="user-avatar">
+    <img [src]="user.picture" [alt]="user.fullName" />
+  </div>
+  <div class="user-info">
+    <h3>{{ user.fullName }}</h3>
+    <p><strong>País:</strong> {{ user.country }}</p>
+    <p><strong>Ciudad:</strong> {{ user.city }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Teléfono:</strong> {{ user.phone }}</p>
+  </div>
+</div>
