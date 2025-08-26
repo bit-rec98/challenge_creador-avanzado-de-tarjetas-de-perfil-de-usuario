@@ -161,10 +161,12 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
       error: (err) => {
         this.error =
           'Error al generar nuevo perfil. Por favor, inténtalo de nuevo.';
-        this.toastr.error(
-          'Error al generar nuevo perfil. Por favor, inténtalo de nuevo.',
-          'Error'
-        );
+        setTimeout(() => {
+          this.toastr.error(
+            'Error al generar nuevo perfil. Por favor, inténtalo de nuevo más tarde.',
+            'Error'
+          );
+        }, 3000);
         console.error(
           '[UsersDashboard][generateNewProfile] Error generating new profile:',
           err
