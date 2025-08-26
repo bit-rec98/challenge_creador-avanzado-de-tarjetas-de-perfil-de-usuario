@@ -25,7 +25,7 @@
         </select>
       </div>
 
-      <div class="action-buttons">
+      <div class="action-buttons" *ngIf="!isLoading">
         <button
           (click)="generateNewProfile()"
           class="generate-button"
@@ -41,12 +41,10 @@
     {{ error }}
   </div>
 
-  <!-- Loading overlay that covers the entire user grid when loading -->
   <div *ngIf="isLoading" class="content-overlay">
     <app-spinner [message]="loadingMessage"></app-spinner>
   </div>
 
-  <!-- User grid that will be covered by the overlay when loading -->
   <div class="user-grid" *ngIf="!isLoading">
     <app-user-card
       *ngFor="let user of filteredUsers"
@@ -65,7 +63,7 @@
     </p>
   </div>
 
-  <div class="load-more-container">
+  <div class="load-more-container" *ngIf="!isLoading">
     <button
       (click)="loadMoreUsers()"
       class="load-more-button"

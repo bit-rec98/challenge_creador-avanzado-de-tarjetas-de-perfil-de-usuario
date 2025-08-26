@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, timer } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +9,17 @@ export class LoadingFeedbackService {
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   public isLoading$: Observable<boolean> = this.isLoadingSubject.asObservable();
 
-  // Minimum display time in milliseconds (3 seconds)
+  // Configuración del tiempo mínimo de renderizado del spinner para evitar parpadeos y mejorar UX
   private readonly minDisplayTime = 3000;
   private loadingStartTime: number = 0;
 
   constructor() {}
 
   /**
-   * Shows the loading spinner
+   * Método para renderizar el spinner
+   * - Inicia el temporizador de carga
+   * - Muestra el spinner
+   * @returns {void}
    */
   show(): void {
     this.loadingStartTime = Date.now();
@@ -24,27 +27,32 @@ export class LoadingFeedbackService {
   }
 
   /**
-   * Hides the loading spinner, respecting the minimum display time
+   * Método para ocultar el spinner
+   * - Detiene el temporizador de carga
+   * - Oculta el spinner
+   * - Respeta el tiempo mínimo de visualización
+   * @returns {void}
    */
   hide(): void {
     const elapsedTime = Date.now() - this.loadingStartTime;
     const remainingTime = Math.max(0, this.minDisplayTime - elapsedTime);
-
-    // If we haven't shown the spinner for the minimum time yet, wait before hiding
     if (remainingTime > 0) {
       setTimeout(() => {
         this.isLoadingSubject.next(false);
       }, remainingTime);
     } else {
-      // We've already shown the spinner for the minimum time, hide it immediately
       this.isLoadingSubject.next(false);
     }
   }
 
   /**
-   * Wraps an observable with loading state management
-   * @param obs$ The observable to wrap
-   * @returns The wrapped observable
+   * Método para envolver un observable con gestión de estado de carga
+   * - Inicia el spinner al suscribirse
+   * - Detiene el spinner al completarse
+   * - Detiene el spinner al producirse un error
+   * - Respeta el tiempo mínimo de visualización
+   * @param obs$ El observable a envolver
+   * @returns {Observable<T>} El observable envuelto
    */
   wrapObservable<T>(obs$: Observable<T>): Observable<T> {
     this.show();

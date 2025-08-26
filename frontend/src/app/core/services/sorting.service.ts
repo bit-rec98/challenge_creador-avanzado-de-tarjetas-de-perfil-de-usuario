@@ -1,23 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LocalstorageService } from './localstorage.service';
-import { UserData } from '../models';
-
-/**
- * Opciones de ordenación disponibles
- */
-export type SortOption = 'none' | 'nameAsc' | 'nameDesc' | 'country';
-
-/**
- * Interfaz para las preferencias de ordenación
- */
-export interface SortPreferences {
-  option: SortOption;
-  lastUsedTimestamp: number;
-}
+import { SortOption, SortPreferences, UserData } from '../models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SortingService {
   // Clave para almacenar las preferencias de ordenación
@@ -27,7 +14,8 @@ export class SortingService {
   private currentSortOptionSubject = new BehaviorSubject<SortOption>('none');
 
   // Observable público para que los componentes se suscriban a los cambios
-  public currentSortOption$: Observable<SortOption> = this.currentSortOptionSubject.asObservable();
+  public currentSortOption$: Observable<SortOption> =
+    this.currentSortOptionSubject.asObservable();
 
   constructor(private localstorageService: LocalstorageService) {
     // Cargar las preferencias guardadas al inicializar el servicio
@@ -82,11 +70,12 @@ export class SortingService {
   /**
    * Guarda las preferencias de ordenación en localStorage
    * @param option - La opción de ordenación a guardar
+   * @returns {void}
    */
   private savePreferences(option: SortOption): void {
     const preferences: SortPreferences = {
       option,
-      lastUsedTimestamp: Date.now()
+      lastUsedTimestamp: Date.now(),
     };
 
     this.localstorageService.saveData(this.SORT_PREFERENCES_KEY, preferences);
@@ -94,9 +83,12 @@ export class SortingService {
 
   /**
    * Carga las preferencias de ordenación desde localStorage
+   * @returns {void}
    */
   private loadSavedPreferences(): void {
-    const savedPreferences = this.localstorageService.getData<SortPreferences>(this.SORT_PREFERENCES_KEY);
+    const savedPreferences = this.localstorageService.getData<SortPreferences>(
+      this.SORT_PREFERENCES_KEY
+    );
 
     if (savedPreferences) {
       this.currentSortOptionSubject.next(savedPreferences.option);
@@ -105,6 +97,7 @@ export class SortingService {
 
   /**
    * Reinicia la opción de ordenación al valor por defecto
+   * @returns {void}
    */
   resetSortOption(): void {
     this.setSortOption('none');

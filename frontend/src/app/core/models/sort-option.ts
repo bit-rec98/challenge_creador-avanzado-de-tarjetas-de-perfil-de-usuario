@@ -1,9 +1,4 @@
 /**
  * Opciones de ordenación disponibles
  */
-export enum SortOption {
-  None = 'none',
-  NameAsc = 'nameAsc',
-  NameDesc = 'nameDesc',
-  Country = 'country',
-}
+export type SortOption = 'none' | 'nameAsc' | 'nameDesc' | 'country';

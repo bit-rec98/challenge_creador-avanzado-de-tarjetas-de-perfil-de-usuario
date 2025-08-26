@@ -27,7 +27,7 @@ export class UserService {
   /**
    * Método para obtener usuarios aleatorios
    * - Realiza una llamada a la API de Random User
-   * - Mapea la respuesta a un array de objetos UserData simplificados
+   * - Mapea la respuesta a un array de objetos UserData simplificados y con campos adicionales para el modal
    * @param count Cantidad de usuarios a obtener
    * @returns {Observable<UserData[]>}
    */
@@ -41,7 +41,17 @@ export class UserService {
           country: user.location.country,
           city: user.location.city,
           email: user.email,
-          phone: user.phone
+          phone: user.phone,
+
+          // Campos adicionales para el modal
+          street: `${user.location.street.number} ${user.location.street.name}`,
+          postcode: user.location.postcode,
+          dateOfBirth: new Date(user.dob.date).toLocaleDateString(),
+          age: user.dob.age,
+          registeredDate: new Date(user.registered.date).toLocaleDateString(),
+          timezone: user.location.timezone.description,
+          timezoneOffset: user.location.timezone.offset,
+          nationality: user.nat,
         }));
       })
     );
@@ -54,9 +64,7 @@ export class UserService {
    * @returns {Observable<UserData>}
    */
   getRandomSingleUser(): Observable<UserData> {
-    return this.getRandomUsers(1).pipe(
-      map((users) => users[0])
-    );
+    return this.getRandomUsers(1).pipe(map((users) => users[0]));
   }
 
   /**

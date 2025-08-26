@@ -1,6 +1,6 @@
 <div class="modal-overlay" *ngIf="user" (click)="onClose()">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <button class="close-button" (click)="onClose()">×</button>
+    <button class="close-button" (click)="onClose()">X</button>
 
     <div class="modal-header">
       <img [src]="user.picture" [alt]="user.fullName" />
@@ -18,6 +18,27 @@
         <h3>Ubicación</h3>
         <p><strong>País:</strong> {{ user.country }}</p>
         <p><strong>Ciudad:</strong> {{ user.city }}</p>
+        <p><strong>Dirección:</strong> {{ user.street }}</p>
+        <p><strong>Código postal:</strong> {{ user.postcode }}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Información personal</h3>
+        <p>
+          <strong>Fecha de nacimiento:</strong> {{ user.dateOfBirth }} (Edad:
+          {{ user.age }})
+        </p>
+        <p><strong>Nacionalidad:</strong> {{ user.nationality }}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Información adicional</h3>
+        <p><strong>Miembro desde:</strong> {{ user.registeredDate }}</p>
+        <p>
+          <strong>Zona horaria:</strong> {{ user.timezone }} ({{
+            user.timezoneOffset
+          }})
+        </p>
       </div>
     </div>
   </div>

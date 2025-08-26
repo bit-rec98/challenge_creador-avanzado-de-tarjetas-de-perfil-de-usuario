@@ -3,9 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { UserData } from '../../core/models';
-import { UserCardComponent, UserDetailModalComponent, SpinnerComponent } from '../shared';
-import { LoadingFeedbackService, SortingService, SortOption, UserService } from '../../core/services';
+import { SortOption, UserData } from '../../core/models';
+import {
+  UserCardComponent,
+  UserDetailModalComponent,
+  SpinnerComponent,
+} from '../shared';
+import {
+  LoadingFeedbackService,
+  SortingService,
+  UserService,
+} from '../../core/services';
 
 @Component({
   selector: 'app-users-dashboard',
@@ -65,7 +73,6 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
    * Método para inicializar el componente
    */
   ngOnInit(): void {
-    // Suscribirse a los cambios en la opción de ordenación
     this.sortSubscription = this.sortingService.currentSortOption$.subscribe(
       (option) => {
         this.sortOption = option;
@@ -73,14 +80,12 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
       }
     );
 
-    // Suscribirse al estado de carga
     this.loadingSubscription = this.loadingFeedbackService.isLoading$.subscribe(
       (isLoading) => {
         this.isLoading = isLoading;
       }
     );
 
-    // Cargar los usuarios guardados o solicitar nuevos
     const savedUsers = this.userService.loadUsersFromLocalStorage();
 
     if (savedUsers && savedUsers.length > 0) {
@@ -120,8 +125,13 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         this.error = 'Error al cargar usuarios. Por favor, inténtalo de nuevo.';
-        this.toastr.error('Error al cargar usuarios. Por favor, inténtalo de nuevo.');
-        console.error('[UsersDashboard][loadMoreUsers] Error loading users:', err);
+        this.toastr.error(
+          'Error al cargar usuarios. Por favor, inténtalo de nuevo.'
+        );
+        console.error(
+          '[UsersDashboard][loadMoreUsers] Error loading users:',
+          err
+        );
         this.loadingFeedbackService.hide();
       },
     });
@@ -131,7 +141,7 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
    * Método para generar un nuevo perfil de usuario
    */
   generateNewProfile(): void {
-    if (this.isLoading) return; // Prevenir múltiples clics
+    if (this.isLoading) return;
 
     this.error = null;
     this.isGeneratingSingle = true;
@@ -142,17 +152,23 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
         this.users = [...this.users, newUser];
         this.applyFiltersAndSort();
         this.userService.saveUsersToLocalStorage(this.users);
-        this.toastr.success('Nuevo perfil generado con éxito.', 'Éxito');
         this.loadingFeedbackService.hide();
         this.isGeneratingSingle = false;
+        setTimeout(() => {
+          this.toastr.success('Nuevo perfil generado con éxito.', 'Éxito');
+        }, 3000);
       },
       error: (err) => {
-        this.error = 'Error al generar nuevo perfil. Por favor, inténtalo de nuevo.';
+        this.error =
+          'Error al generar nuevo perfil. Por favor, inténtalo de nuevo.';
         this.toastr.error(
           'Error al generar nuevo perfil. Por favor, inténtalo de nuevo.',
           'Error'
         );
-        console.error('[UsersDashboard][generateNewProfile] Error generating new profile:', err);
+        console.error(
+          '[UsersDashboard][generateNewProfile] Error generating new profile:',
+          err
+        );
         this.loadingFeedbackService.hide();
         this.isGeneratingSingle = false;
       },
@@ -177,7 +193,6 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
    * Método para aplicar filtros y ordenación a la lista de usuarios
    */
   applyFiltersAndSort(): void {
-    // Aplicar filtro de búsqueda
     if (this.searchTerm.trim()) {
       const searchTermLower = this.searchTerm.toLowerCase();
       this.filteredUsers = this.users.filter(
@@ -189,7 +204,6 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
       this.filteredUsers = [...this.users];
     }
 
-    // Aplicar ordenación usando el servicio
     this.filteredUsers = this.sortingService.sortUsers(this.filteredUsers);
   }
 
@@ -211,6 +225,6 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
    * Determina el mensaje de carga basado en la acción actual
    */
   get loadingMessage(): string {
-    return this.isGeneratingSingle ? "Generando nuevo perfil..." : "Cargando perfiles...";
+    return 'Cargando perfiles...';
   }
 }
