@@ -6,5 +6,5 @@
 # Regla de redirección para enrutamiento SPA
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/"
   status = 200
