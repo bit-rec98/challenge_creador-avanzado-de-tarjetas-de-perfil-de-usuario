@@ -38,7 +38,7 @@ Este proyecto es una Aplicación de Página Única (SPA) desarrollada con Angula
 - Manejo de estados vacíos y errores con mensajes informativos
 
 ### Video demostrativo: 
-- Link:
+- Link: https://drive.google.com/file/d/1mhjxVGDsaCgFhOhH7sKFoNwa43YgRXmJ/view?usp=drive_link
 
 ## Arquitectura y Organización del Código
 
