@@ -1,3 +1,4 @@
+/* Tarjeta de usuario con estilo elevado */
 .user-card {
   display: flex;
   flex-direction: column;
@@ -10,17 +11,20 @@
   height: 100%;
 }
 
+/* Efecto de elevación al pasar el cursor */
 .user-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Contenedor de la imagen de perfil */
 .user-avatar {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
 }
 
+/* Imagen de perfil circular */
 .user-avatar img {
   width: 120px;
   height: 120px;
@@ -29,16 +33,19 @@
   border: 3px solid #4a90e2;
 }
 
+/* Sección de información del usuario */
 .user-info {
   text-align: center;
 }
 
+/* Nombre del usuario */
 .user-info h3 {
   margin: 0 0 10px;
   color: #333;
   font-size: 1.2rem;
 }
 
+/* Detalles de contacto y ubicación */
 .user-info p {
   margin: 5px 0;
   color: #666;

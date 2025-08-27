@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reseteo básico de estilos para todos los elementos */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,10 +6,12 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Fondo general para toda la aplicación */
 body {
   background-color: #f5f7fa;
 }
 
+/* Estilo genérico para botones interactivos */
 button {
   cursor: pointer;
 }

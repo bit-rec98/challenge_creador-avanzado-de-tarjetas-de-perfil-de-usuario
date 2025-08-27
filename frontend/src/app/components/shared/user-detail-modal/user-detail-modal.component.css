@@ -1,3 +1,4 @@
+/* Capa oscura que cubre toda la pantalla cuando el modal está activo */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -10,8 +11,15 @@
   align-items: center;
   z-index: 1000;
   animation: fadeIn 0.3s ease;
+  opacity: 1;
 }
 
+/* Animación de desvanecimiento al cerrar el modal */
+.modal-overlay.closing {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+/* Contenedor principal del contenido del modal */
 .modal-content {
   background-color: white;
   border-radius: 10px;
@@ -22,8 +30,15 @@
   padding: 20px;
   position: relative;
   animation: slideIn 0.3s ease;
+  transform: translateY(0);
 }
 
+/* Animación de deslizamiento al cerrar el modal */
+.modal-content.closing {
+  animation: slideOut 0.3s ease forwards;
+}
+
+/* Botón de cierre del modal */
 .close-button {
   position: absolute;
   top: 10px;
@@ -41,6 +56,7 @@
   border-radius: 50%;
 }
 
+/* Cabecera del modal con foto y nombre */
 .modal-header {
   display: flex;
   flex-direction: column;
@@ -50,6 +66,7 @@
   border-bottom: 1px solid #eee;
 }
 
+/* Imagen de perfil en el modal */
 .modal-header img {
   width: 150px;
   height: 150px;
@@ -59,11 +76,13 @@
   margin-bottom: 15px;
 }
 
+/* Título con el nombre del usuario */
 .modal-header h2 {
   margin: 0;
   color: #333;
 }
 
+/* Secciones de información detallada */
 .detail-section {
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -72,6 +91,7 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+/* Título de cada sección de detalles */
 .detail-section h3 {
   color: #4a90e2;
   margin-top: 0;
@@ -81,18 +101,21 @@
   font-size: 18px;
 }
 
+/* Párrafos de información */
 .detail-section p {
   margin: 10px 0;
   color: #555;
   line-height: 1.5;
 }
 
+/* Destacado para etiquetas de campos */
 .detail-section p strong {
   color: #333;
   display: inline-block;
   min-width: 150px;
 }
 
+/* Animación de aparición gradual */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -102,6 +125,17 @@
   }
 }
 
+/* Animación de desaparición gradual */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Animación de entrada deslizante desde abajo */
 @keyframes slideIn {
   from {
     transform: translateY(50px);
@@ -113,6 +147,19 @@
   }
 }
 
+/* Animación de salida deslizante hacia abajo */
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+}
+
+/* Estilos responsivos para dispositivos móviles */
 @media (max-width: 768px) {
   .modal-content {
     width: 95%;

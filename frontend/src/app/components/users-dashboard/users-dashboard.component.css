@@ -1,9 +1,11 @@
+/* Estilos generales del contenedor principal */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
+/* Estilos del encabezado */
 header {
   margin-bottom: 30px;
   text-align: center;
@@ -14,6 +16,7 @@ header h1 {
   margin-bottom: 20px;
 }
 
+/* Contenedor de búsqueda y ordenación */
 .search-sort-container {
   display: flex;
   justify-content: center;
@@ -22,7 +25,9 @@ header h1 {
   margin-bottom: 20px;
 }
 
-.search-input, .sort-select {
+/* Estilos compartidos para campos de entrada y selección */
+.search-input,
+.sort-select {
   padding: 10px 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -30,22 +35,82 @@ header h1 {
   min-width: 250px;
 }
 
-.search-input:focus, .sort-select:focus {
+/* Estado de enfoque para campos interactivos */
+.search-input:focus,
+.sort-select:focus {
   outline: none;
   border-color: #4a90e2;
 }
 
+/* Estructura del grid de tarjetas de usuario */
 .user-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 25px;
   margin-bottom: 30px;
+  position: relative;
 }
 
+/* Animación de aparición para cada tarjeta de usuario */
 .user-grid-item {
   height: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: cardAppear 0.5s ease forwards;
 }
 
+/* Animación de rotación para elementos spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animación para la aparición de tarjetas con efecto de desplazamiento */
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Retrasos escalonados para animación secuencial de tarjetas */
+.user-grid-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.user-grid-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.user-grid-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.user-grid-item:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.user-grid-item:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.user-grid-item:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.user-grid-item:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.user-grid-item:nth-child(8) {
+  animation-delay: 0.4s;
+}
+.user-grid-item:nth-child(9) {
+  animation-delay: 0.45s;
+}
+.user-grid-item:nth-child(n + 10) {
+  animation-delay: 0.5s;
+}
+
+/* Estilo para mensajes de error */
 .error-message {
   background-color: #ffebee;
   color: #c62828;
@@ -55,6 +120,7 @@ header h1 {
   margin-bottom: 20px;
 }
 
+/* Contenedor para indicador de carga */
 .loading-indicator {
   display: flex;
   flex-direction: column;
@@ -62,6 +128,7 @@ header h1 {
   margin: 30px 0;
 }
 
+/* Animación del spinner de carga */
 .spinner {
   width: 40px;
   height: 40px;
@@ -72,22 +139,21 @@ header h1 {
   margin-bottom: 10px;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
+/* Estilo para mensaje de resultados vacíos */
 .no-results {
   text-align: center;
   padding: 30px;
   color: #666;
 }
 
+/* Contenedor para botón de cargar más */
 .load-more-container {
   display: flex;
   justify-content: center;
   margin: 30px 0;
 }
 
+/* Estilo del botón de cargar más perfiles */
 .load-more-button {
   background-color: #4a90e2;
   color: white;
@@ -99,21 +165,25 @@ header h1 {
   transition: background-color 0.3s ease;
 }
 
+/* Estado hover del botón cargar más */
 .load-more-button:hover {
   background-color: #3570b8;
 }
 
+/* Estado deshabilitado del botón cargar más */
 .load-more-button:disabled {
   background-color: #a1c6ea;
   cursor: not-allowed;
 }
 
+/* Contenedor de botones de acción */
 .action-buttons {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
+/* Estilo del botón para generar nuevo perfil */
 .generate-button {
   background-color: #5cb85c;
   color: white;
@@ -125,6 +195,7 @@ header h1 {
   transition: background-color 0.3s ease;
 }
 
+/* Estado hover del botón generar nuevo perfil */
 .generate-button:hover {
   background-color: #4cae4c;
 }
@@ -135,7 +206,8 @@ header h1 {
     gap: 15px;
   }
 
-  .search-input, .sort-select {
+  .search-input,
+  .sort-select {
     min-width: 100%;
   }
 }

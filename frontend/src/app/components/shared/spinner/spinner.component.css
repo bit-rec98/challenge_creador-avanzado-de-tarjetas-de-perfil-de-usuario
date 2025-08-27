@@ -1,3 +1,4 @@
+/* Contenedor principal del spinner de carga */
 .spinner-container {
   display: flex;
   flex-direction: column;
@@ -6,6 +7,7 @@
   padding: 30px;
 }
 
+/* Elemento giratorio del spinner */
 .spinner {
   width: 50px;
   height: 50px;
@@ -16,6 +18,7 @@
   margin-bottom: 15px;
 }
 
+/* Texto informativo durante la carga */
 .message {
   color: #666;
   font-size: 1rem;
@@ -23,6 +26,7 @@
   margin: 0;
 }
 
+/* Capa superpuesta que bloquea la interacción durante la carga */
 .overlay {
   position: fixed;
   top: 0;
@@ -33,6 +37,7 @@
   z-index: 1000;
 }
 
+/* Animación de rotación continua */
 @keyframes spin {
   to { transform: rotate(360deg); }
 }

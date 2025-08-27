@@ -1,5 +1,5 @@
-<div class="modal-overlay" *ngIf="user" (click)="onClose()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
+<div class="modal-overlay" *ngIf="user" (click)="onClose()" [class.closing]="isClosing">
+  <div class="modal-content" (click)="$event.stopPropagation()" [class.closing]="isClosing">
     <button class="close-button" (click)="onClose()">X</button>
 
     <div class="modal-header">

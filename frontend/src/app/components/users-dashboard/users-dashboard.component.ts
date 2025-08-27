@@ -35,6 +35,9 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
   // Usuarios filtrados
   filteredUsers: UserData[] = [];
 
+  // Flag para refrescar animaciones
+  refreshAnimations: boolean = false;
+
   // Usuario seleccionado
   selectedUser: UserData | null = null;
 
@@ -110,6 +113,11 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
 
   /**
    * Método para cargar más usuarios
+   * - Permite cargar más usuarios de forma paginada
+   * - Utiliza el servicio de usuario para obtener más usuarios aleatorios
+   * - Agrega los nuevos usuarios a la lista de usuarios
+   * - Refresca las animaciones de las tarjetas
+   * - Guarda los nuevos usuarios en el almacenamiento local
    */
   loadMoreUsers(): void {
     this.error = null;
@@ -118,6 +126,7 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
     this.userService.getRandomUsers(this.usersPerPage).subscribe({
       next: (newUsers) => {
         this.users = [...this.users, ...newUsers];
+        this.refreshCardAnimations();
         this.applyFiltersAndSort();
         this.userService.saveUsersToLocalStorage(this.users);
         this.page++;
@@ -125,9 +134,11 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         this.error = 'Error al cargar usuarios. Por favor, inténtalo de nuevo.';
-        this.toastr.error(
-          'Error al cargar usuarios. Por favor, inténtalo de nuevo.'
-        );
+        setTimeout(() => {
+          this.toastr.error(
+            'Error al cargar usuarios. Por favor, inténtalo de nuevo más tarde.'
+          );
+        }, 3000);
         console.error(
           '[UsersDashboard][loadMoreUsers] Error loading users:',
           err
@@ -139,6 +150,12 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
 
   /**
    * Método para generar un nuevo perfil de usuario
+   * - Permite crear un nuevo perfil de usuario aleatorio
+   * - Utiliza el servicio de usuario para obtener un nuevo usuario aleatorio
+   * - Agrega el nuevo usuario a la lista de usuarios
+   * - Refresca las animaciones de las tarjetas
+   * - Guarda el nuevo usuario en el almacenamiento local
+   * - Muestra un mensaje de éxito
    */
   generateNewProfile(): void {
     if (this.isLoading) return;
@@ -150,6 +167,7 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
     this.userService.getRandomSingleUser().subscribe({
       next: (newUser) => {
         this.users = [...this.users, newUser];
+        this.refreshCardAnimations();
         this.applyFiltersAndSort();
         this.userService.saveUsersToLocalStorage(this.users);
         this.loadingFeedbackService.hide();
@@ -181,6 +199,7 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
    * Método para manejar la búsqueda de usuarios
    */
   onSearch(): void {
+    this.refreshCardAnimations();
     this.applyFiltersAndSort();
   }
 
@@ -228,5 +247,18 @@ export class UsersDashboardComponent implements OnInit, OnDestroy {
    */
   get loadingMessage(): string {
     return 'Cargando perfiles...';
+  }
+
+  /**
+   * Método para refrescar las animaciones de las tarjetas
+   * - Permite que las animaciones se reinicien al agregar o eliminar usuarios
+   */
+  private refreshCardAnimations(): void {
+    const currentUsers = [...this.filteredUsers];
+    this.filteredUsers = [];
+
+    setTimeout(() => {
+      this.applyFiltersAndSort();
+    }, 10);
   }
 }

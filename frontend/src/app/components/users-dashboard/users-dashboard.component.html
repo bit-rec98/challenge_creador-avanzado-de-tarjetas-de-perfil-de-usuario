@@ -2,6 +2,8 @@
   <header>
     <h1>Tarjetas de perfiles de usuarios</h1>
     <div class="search-sort-container">
+
+      <!-- Contenedor de búsqueda -->
       <div class="search-container">
         <input
           type="text"
@@ -12,6 +14,7 @@
         />
       </div>
 
+      <!-- Contenedor de ordenación -->
       <div class="sort-container">
         <select
           [(ngModel)]="sortOption"
@@ -25,6 +28,7 @@
         </select>
       </div>
 
+      <!-- Contenedor de acciones -->
       <div class="action-buttons" *ngIf="!isLoading">
         <button
           (click)="generateNewProfile()"
@@ -37,20 +41,24 @@
     </div>
   </header>
 
+  <!-- Mensaje de error -->
   <div *ngIf="error" class="error-message">
     {{ error }}
   </div>
 
+  <!-- Spinner de carga -->
   <div *ngIf="isLoading" class="content-overlay">
     <app-spinner [message]="loadingMessage"></app-spinner>
   </div>
 
+  <!-- Grid de usuarios -->
   <div class="user-grid" *ngIf="!isLoading">
     <app-user-card
-      *ngFor="let user of filteredUsers"
+      *ngFor="let user of filteredUsers; let i = index"
       [user]="user"
       (cardClick)="openUserDetails(user)"
       class="user-grid-item"
+      [attr.data-index]="i"
     ></app-user-card>
   </div>
 
@@ -73,6 +81,7 @@
     </button>
   </div>
 
+  <!-- Modal de detalles del usuario -->
   <app-user-detail-modal
     [user]="selectedUser"
     (closeModal)="closeUserDetails()"

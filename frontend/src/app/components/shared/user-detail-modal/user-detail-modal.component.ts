@@ -13,7 +13,14 @@ export class UserDetailModalComponent {
   @Input() user: UserData | null = null;
   @Output() closeModal = new EventEmitter<void>();
 
+  isClosing = false;
+
   onClose(): void {
-    this.closeModal.emit();
+    this.isClosing = true;
+
+    setTimeout(() => {
+      this.isClosing = false;
+      this.closeModal.emit();
+    }, 300);
   }
 }
