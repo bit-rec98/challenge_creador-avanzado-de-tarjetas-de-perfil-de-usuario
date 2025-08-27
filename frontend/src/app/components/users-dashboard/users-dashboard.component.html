@@ -71,7 +71,7 @@
     </p>
   </div>
 
-  <div class="load-more-container" *ngIf="!isLoading">
+  <div class="load-more-container" *ngIf="!isLoading && filteredUsers.length > 0">
     <button
       (click)="loadMoreUsers()"
       class="load-more-button"
