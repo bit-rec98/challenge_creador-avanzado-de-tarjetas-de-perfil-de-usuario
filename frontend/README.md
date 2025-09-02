@@ -37,9 +37,6 @@ Este proyecto es una Aplicación de Página Única (SPA) desarrollada con Angula
 - Diseño completamente responsivo para todos los tamaños de pantalla
 - Manejo de estados vacíos y errores con mensajes informativos
 
-### Video demostrativo: 
-- Link: https://drive.google.com/file/d/1mhjxVGDsaCgFhOhH7sKFoNwa43YgRXmJ/view?usp=drive_link
-
 ## Arquitectura y Organización del Código
 
 El proyecto sigue una estructura modular organizada según las mejores prácticas de Angular:
